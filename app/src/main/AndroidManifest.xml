@@ -29,15 +29,15 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name=".home.LoginActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name=".home.RegisterActivity"
+            android:name=".login.RegisterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name=".home.AddNewBookActivity"
+            android:name=".addNewBook.AddNewBookActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
     </application>

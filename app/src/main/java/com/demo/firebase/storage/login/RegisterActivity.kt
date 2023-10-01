@@ -1,4 +1,4 @@
-package com.demo.firebase.storage.home
+package com.demo.firebase.storage.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.demo.firebase.storage.databinding.RegisterActivityBinding
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Account demo
+ * thanh@gmail.com
+ * 123456
+ */
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: RegisterActivityBinding
     private lateinit var auth: FirebaseAuth

@@ -1,4 +1,4 @@
-package com.demo.firebase.storage.home
+package com.demo.firebase.storage.addNewBook
 
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +22,10 @@ class AddNewBookActivity : AppCompatActivity() {
         binding.btnAddBook.setOnClickListener {
             handleStoreData()
         }
+
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun handleStoreData() {
@@ -36,6 +40,7 @@ class AddNewBookActivity : AppCompatActivity() {
             .add(book)
             .addOnSuccessListener { documentReference ->
                 Toast.makeText(this, "Add book success.", Toast.LENGTH_SHORT).show()
+                onBackPressed()
                 Log.d("---->", "BookSnapshot added with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
