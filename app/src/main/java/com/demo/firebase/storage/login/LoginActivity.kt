@@ -7,7 +7,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.demo.firebase.storage.databinding.LoginActivityBinding
 import com.demo.firebase.storage.home.HomeActivity
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: LoginActivityBinding
@@ -28,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
     private fun handleClick() {
         binding.tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
         }
 
         binding.btnLogin.setOnClickListener {
@@ -39,24 +42,49 @@ class LoginActivity : AppCompatActivity() {
     private fun handleLogin() {
         val email = binding.edtUsername.text.toString()
         val password = binding.edtPassword.text.toString()
+        if (email.isEmpty()) {
+            showToast("Please input email first.")
+        } else if (password.isEmpty()) {
+            showToast("Please input password.")
+        } else {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("---->", "signInWithEmail:success")
+                        openHomeActivity()
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("---->", "signInWithEmail:failure", task.exception)
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("---->", "signInWithEmail:success")
-                    openHomeActivity()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("---->", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        when (task.exception) {
+                            is FirebaseAuthUserCollisionException ->
+                                showToast("The email address is already in use by another account.")
+
+                            is FirebaseAuthWeakPasswordException ->
+                                showToast("Password should be at least 6 characters.")
+
+                            is FirebaseAuthInvalidCredentialsException ->
+                                showToast("The email address is badly formatted.")
+
+                            is FirebaseException ->
+                                showToast("Login fail.")
+
+                            else ->
+                                showToast(task.exception?.message ?: "")
+                        }
+                    }
                 }
-            }
+        }
     }
 
     private fun openHomeActivity() {
         startActivity(Intent(this, HomeActivity::class.java))
         finish()
+    }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
 }

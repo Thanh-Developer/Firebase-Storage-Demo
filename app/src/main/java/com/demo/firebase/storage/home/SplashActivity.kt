@@ -2,7 +2,6 @@ package com.demo.firebase.storage.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.demo.firebase.storage.databinding.SplashActivityBinding
 import com.demo.firebase.storage.login.LoginActivity
@@ -16,7 +15,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = SplashActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("---->", "SplashActivity")
         initFirebase()
         checkIfUserIsLogin()
     }

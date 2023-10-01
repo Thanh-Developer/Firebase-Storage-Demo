@@ -39,7 +39,6 @@
         <activity
             android:name=".addNewBook.AddNewBookActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
     </application>
 
 </manifest>

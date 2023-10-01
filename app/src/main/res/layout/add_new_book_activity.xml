@@ -21,14 +21,6 @@
             android:layout_gravity="center"
             android:text="Add New Boook" />
 
-        <ImageView
-            android:id="@+id/imgSignOut"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="right"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_logout" />
-
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.AppCompatEditText

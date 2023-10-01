@@ -65,12 +65,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun openLoginActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
-        finish()
     }
 
     private fun openAddNewBookActivity() {
         startActivity(Intent(this, AddNewBookActivity::class.java))
-        finish()
     }
 
 }
